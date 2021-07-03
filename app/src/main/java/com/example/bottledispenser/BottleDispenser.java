@@ -43,17 +43,18 @@ public class BottleDispenser {
     }
 
     public String buyBottle(int btl) {
-        if (money < bottle_array.get(btl - 1).getPrice()) {
+        if (money < bottle_array.get(btl).getPrice()) {
             return "Add money first!";
         } else {
             if (bottles == 0) {
                 return "No more bottles!";
             } else {
-                money -= bottle_array.get(btl - 1).getPrice();
+                money -= bottle_array.get(btl).getPrice();
                 bottles -= 1;
-                String returnStr =  "KACHUNK! " + bottle_array.get(btl - 1).getName() +
+                String returnStr =  "KACHUNK! " + bottle_array.get(btl).getName() +
                         " came out of the dispenser!";
-                deleteBottle(btl - 1);
+//                deleteBottle(btl);
+                bottle_array.set(btl, null); //TODO Does not work. Figure out how to test if the bottles exist.
                 return returnStr;
             }
         }
