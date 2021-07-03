@@ -37,41 +37,48 @@ public class BottleDispenser {
         bottle_array.remove(bottle);
     }
 
-    public void addMoney() {
-        money += 1;
-        System.out.println("Klink! Added more money!");
+    public String addMoney(int amt) {
+        money += amt;
+         return "Klink! Added " + amt + " money!";
     }
 
-    public void buyBottle(int btl) {
+    public String buyBottle(int btl) {
         if (money < bottle_array.get(btl - 1).getPrice()) {
-            System.out.println("Add money first!");
+            return "Add money first!";
         } else {
             if (bottles == 0) {
-                System.out.println("No more bottles!");
+                return "No more bottles!";
             } else {
                 money -= bottle_array.get(btl - 1).getPrice();
                 bottles -= 1;
-                System.out.println("KACHUNK! " + bottle_array.get(btl - 1).getName() +
-                        " came out of the dispenser!");
+                String returnStr =  "KACHUNK! " + bottle_array.get(btl - 1).getName() +
+                        " came out of the dispenser!";
                 deleteBottle(btl - 1);
+                return returnStr;
             }
         }
     }
 
-    public void returnMoney() {
+    public String returnMoney() {
         DecimalFormat df = new DecimalFormat("##0.00");
-        System.out.println("Klink klink. Money came out! You got " + df.format(money) + "€ back");
+        String returnStr = "Klink klink. Money came out! You got " + df.format(money) + "€ back";
         money = 0;
+        return returnStr;
     }
 
-    public void listBottles() {
+    public StringBuilder listBottles() {
+        StringBuilder returnStr = new StringBuilder();
         for (int i = 0; i < bottle_array.size(); i++) {
-            System.out.println(i + 1 + ". Name: " + bottle_array.get(i).getName());
-            System.out.println("\tSize: " + bottle_array.get(i).getSize() +
-                    "\tPrice: " + bottle_array.get(i).getPrice());
+            returnStr.append("Name: ");
+            returnStr.append(bottle_array.get(i).getName());
+            returnStr.append("\tSize: ");
+            returnStr.append(bottle_array.get(i).getSize());
+            returnStr.append("\tPrice: ");
+            returnStr.append(bottle_array.get(i).getPrice());
+            returnStr.append("\n");
             Scanner sc = new Scanner(System.in);
-
         }
+        return returnStr;
 
     }
 }
