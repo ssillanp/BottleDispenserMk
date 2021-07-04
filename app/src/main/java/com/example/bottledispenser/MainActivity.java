@@ -8,6 +8,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
 
     TextView txtOut;
@@ -24,8 +27,10 @@ public class MainActivity extends AppCompatActivity {
         moneyAmt = (SeekBar) findViewById(R.id.moneyAmountBar);
         mySpinner = (Spinner) findViewById(R.id.selectBottle);
 
-        String[] bottleList = {"Pepsi Max, 0.5l", "Pepsi Max, 1.5l", "Coca-Cola Zero, 0.5l", "Coca-Cola Zero, 1.5l", "Fanta Zero, 0.5l"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, bottleList);
+        String[] bottleList = {"Pepsi Max, 0.5l", "Pepsi Max, 1.5l", "Coca-Cola Zero, 0.5l",
+                "Coca-Cola Zero, 1.5l", "Fanta Zero, 0.5l"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, bottleList);
         mySpinner.setAdapter(adapter);
 
     }
@@ -40,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     public void getBottle(View v){
 //        System.out.println(mySpinner.getSelectedItemId());
         txtOut.setText(bD.buyBottle((int) mySpinner.getSelectedItemId()));
+        ArrayAdapter<String> updateAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, bD.listBottles());
+        mySpinner.setAdapter(updateAdapter);
     }
 
     public void returnMoney(View v){
@@ -47,7 +55,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void listBottles(View v){
-        txtOut.setText(bD.listBottles());
+        StringBuilder outString = new StringBuilder();
+        for (String bottleItem:bD.listBottles()){
+            outString.append(bottleItem);
+            outString.append("\n");
+        }
+        txtOut.setText(outString);
     }
 
 

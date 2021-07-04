@@ -53,8 +53,7 @@ public class BottleDispenser {
                 bottles -= 1;
                 String returnStr =  "KACHUNK! " + bottle_array.get(btl).getName() +
                         " came out of the dispenser!";
-//                deleteBottle(btl);
-                bottle_array.set(btl, null); //TODO Does not work. Figure out how to test if the bottles exist.
+                deleteBottle(btl);
                 return returnStr;
             }
         }
@@ -67,19 +66,17 @@ public class BottleDispenser {
         return returnStr;
     }
 
-    public StringBuilder listBottles() {
-        StringBuilder returnStr = new StringBuilder();
+    public ArrayList<String> listBottles() {
+        ArrayList<String> returnArray = new ArrayList<String>();
+        String returnStr = "";
         for (int i = 0; i < bottle_array.size(); i++) {
-            returnStr.append("Name: ");
-            returnStr.append(bottle_array.get(i).getName());
-            returnStr.append("\tSize: ");
-            returnStr.append(bottle_array.get(i).getSize());
-            returnStr.append("\tPrice: ");
-            returnStr.append(bottle_array.get(i).getPrice());
-            returnStr.append("\n");
-            Scanner sc = new Scanner(System.in);
+            returnStr = bottle_array.get(i).getName() + ", " + bottle_array.get(i).getSize() +
+                    ", " + bottle_array.get(i).getPrice();
+            returnArray.add(returnStr);
+            returnStr = "";
+//            Scanner sc = new Scanner(System.in);
         }
-        return returnStr;
+        return returnArray;
 
     }
 }
