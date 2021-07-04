@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     SeekBar moneyAmt;
     Spinner mySpinner;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,11 +28,8 @@ public class MainActivity extends AppCompatActivity {
         money = (TextView) findViewById(R.id.moneyDisp);
         moneyAmt = (SeekBar) findViewById(R.id.moneyAmountBar);
         mySpinner = (Spinner) findViewById(R.id.selectBottle);
-
-        String[] bottleList = {"Pepsi Max, 0.5l", "Pepsi Max, 1.5l", "Coca-Cola Zero, 0.5l",
-                "Coca-Cola Zero, 1.5l", "Fanta Zero, 0.5l"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, bottleList);
+                android.R.layout.simple_spinner_dropdown_item, bD.listBottles());
         mySpinner.setAdapter(adapter);
 
     }
@@ -43,11 +42,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getBottle(View v){
-//        System.out.println(mySpinner.getSelectedItemId());
-        txtOut.setText(bD.buyBottle((int) mySpinner.getSelectedItemId()));
-        ArrayAdapter<String> updateAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, bD.listBottles());
-        mySpinner.setAdapter(updateAdapter);
+        try {
+            txtOut.setText(bD.buyBottle((int) mySpinner.getSelectedItemId()));
+            ArrayAdapter<String> updateAdapter = new ArrayAdapter<>(this,
+                    android.R.layout.simple_spinner_dropdown_item, bD.listBottles());
+            mySpinner.setAdapter(updateAdapter);
+        } catch (IndexOutOfBoundsException e) {
+            txtOut.setText("The machine is empty");
+        }
     }
 
     public void returnMoney(View v){

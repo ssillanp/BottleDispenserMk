@@ -50,10 +50,10 @@ public class BottleDispenser {
                 return "No more bottles!";
             } else {
                 money -= bottle_array.get(btl).getPrice();
-                bottles -= 1;
                 String returnStr =  "KACHUNK! " + bottle_array.get(btl).getName() +
                         " came out of the dispenser!";
                 deleteBottle(btl);
+                bottles -= 1;
                 return returnStr;
             }
         }
