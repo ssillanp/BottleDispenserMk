@@ -13,6 +13,7 @@ public class BottleDispenser {
     // The array for the Bottle-objects
     private ArrayList<Bottle> bottle_array;
     private double money;
+    private String receipt = "";
 
 
     private BottleDispenser() {
@@ -52,6 +53,8 @@ public class BottleDispenser {
                 money -= bottle_array.get(btl).getPrice();
                 String returnStr =  "KACHUNK! " + bottle_array.get(btl).getName() +
                         " came out of the dispenser!";
+                receipt = "Item: " + bottle_array.get(btl).getName() + ", " + bottle_array.get(btl).getSize() +
+                        "l, Price: " + bottle_array.get(btl).getPrice();
                 deleteBottle(btl);
                 bottles -= 1;
                 return returnStr;
@@ -78,5 +81,9 @@ public class BottleDispenser {
         }
         return returnArray;
 
+    }
+
+    public String getReceipt(){
+        return receipt;
     }
 }

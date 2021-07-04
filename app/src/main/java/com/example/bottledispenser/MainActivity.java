@@ -1,5 +1,7 @@
 package com.example.bottledispenser;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.SeekBar;
@@ -8,11 +10,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
+    Context context = null;
     TextView txtOut;
     TextView money;
     SeekBar moneyAmt;
@@ -24,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = MainActivity.this;
         txtOut = (TextView) findViewById(R.id.textOutputView);
         money = (TextView) findViewById(R.id.moneyDisp);
         moneyAmt = (SeekBar) findViewById(R.id.moneyAmountBar);
@@ -63,6 +69,26 @@ public class MainActivity extends AppCompatActivity {
             outString.append("\n");
         }
         txtOut.setText(outString);
+    }
+
+    public void getReceipt(View v){
+        try {
+            OutputStreamWriter outStream = new OutputStreamWriter(context.openFileOutput("receipt.txt",
+                    Context.MODE_PRIVATE));
+
+            outStream.write("Receipt of your purchase:" + "\n");
+            outStream.write(bD.getReceipt());
+            outStream.close();
+        } catch (IOException e) {
+            Log.e("LoadFileIOException", "Virhe striimissä");
+        } finally {
+            System.out.println("WRITTEN");
+        }
+        txtOut.setText("Receipt saved! in: " + context.getFilesDir());
+    }
+
+    public void exitApp(View v) {
+        System.exit(0);
     }
 
 

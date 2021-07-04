@@ -42,7 +42,8 @@
             android:layout_height="100dp" android:id="@+id/buttonListBottles"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonGetBottle" android:layout_marginEnd="44dp"
-            app:layout_constraintBottom_toTopOf="@+id/buttonExit" android:onClick="listBottles"/>
+            app:layout_constraintBottom_toTopOf="@+id/buttonExit" android:onClick="listBottles"
+            app:layout_constraintVertical_bias="0.16"/>
     <Button
             android:text="Return Money"
             android:layout_width="150dp"
@@ -50,14 +51,16 @@
             app:layout_constraintTop_toBottomOf="@+id/buttonAddMoney"
             app:layout_constraintBottom_toTopOf="@+id/buttonExit"
             app:layout_constraintEnd_toStartOf="@+id/buttonListBottles" app:layout_constraintStart_toStartOf="parent"
-            android:onClick="returnMoney"/>
+            android:onClick="returnMoney" app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintVertical_bias="0.151"/>
     <Button
             android:text="EXIT"
             android:layout_width="330dp"
             android:layout_height="44dp" android:id="@+id/buttonExit"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="68dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.493"/>
+            android:layout_marginBottom="36dp" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.493"
+            android:onClick="exitApp"/>
     <SeekBar
             android:layout_width="181dp"
             android:layout_height="12dp" android:id="@+id/moneyAmountBar"
@@ -83,4 +86,11 @@
             app:layout_constraintStart_toStartOf="parent"
             android:spinnerMode="dialog" app:layout_constraintHorizontal_bias="0.879"
             app:layout_constraintVertical_bias="0.569"/>
+    <Button
+            android:text="RECEIPT"
+            android:layout_width="330dp"
+            android:layout_height="44dp" android:id="@+id/getReceipt"
+            app:layout_constraintTop_toBottomOf="@+id/buttonListBottles" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toTopOf="@+id/buttonExit"
+            android:onClick="getReceipt"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
